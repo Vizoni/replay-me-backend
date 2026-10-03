@@ -21,7 +21,7 @@ public class ReplayController {
     ) {
 
         try {
-            UploadFileResponse response = replayService.uploadFile(file);
+            UploadFileResponse response = replayService.createReplay(file);
 
             return ResponseEntity.ok(response);
 
