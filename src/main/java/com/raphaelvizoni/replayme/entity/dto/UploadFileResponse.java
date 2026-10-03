@@ -1,7 +1,7 @@
 package com.raphaelvizoni.replayme.entity.dto;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.time.Instant;
 
-public record UploadFileResponse(String url) {
+public record UploadFileResponse(String id, String fileName, String url, Instant createdAt) {
 
 }

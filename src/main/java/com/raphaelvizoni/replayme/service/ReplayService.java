@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.UUID;
 
 @Service
@@ -19,14 +20,16 @@ public class ReplayService {
 
     public UploadFileResponse uploadFile(MultipartFile file) {
         try {
-            String fileName = UUID.randomUUID() + ".mp4";
+            String id = UUID.randomUUID().toString();
+            String fileName = id + ".mp4";
+            Instant timestamp = Instant.now();
             String uploadedFileURL = storage.uploadFile(
                     file.getInputStream(),
                     file.getSize(),
                     fileName,
                     file.getContentType()
             );
-            return new UploadFileResponse(uploadedFileURL);
+            return new UploadFileResponse(id, fileName, uploadedFileURL, timestamp);
         } catch (IOException e) {
             throw new RuntimeException(
                     "Erro ao ler arquivo para upload",
